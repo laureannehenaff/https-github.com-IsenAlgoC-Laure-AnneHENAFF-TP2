@@ -1,33 +1,66 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-short a = 0;
-short b =0;
-short c = 0;
+int programme = 1;
+float longueur;
+float largeur;
+float hauteur;
+float valeur1;
+float valeur2;
+float tmp;
+
+void permuter(valeur1,valeur2) {
+    tmp = valeur1;
+    valeur1 = valeur2;
+    valeur2 = tmp;
+}
 
 int main() {
-    do {printf("Quels sont les dimensions du bagage en cm ?");
-        scanf_s("%d",&a);
-        scanf_s("%d",&b);
-        scanf_s("%d",&c);
-    }
-    while (1>a && 1>b && 1>c);
-    while (150<a && 150<b && 150<c)
-
-    if (a<b) { short t1=a; a=b; b=t1 ; }
-        if (a<c) { short t3=a; a=c; c=t3 ; }
-        else {
-            if (a<55 && b<35 && c<25) {
-            printf("VALIDE");
-            }
-            else { print("NON VALIDE");}
+    while (programme=1)
+    {
+        //On demande les dimensions de la valise et on vérifie si elles sont comprises entre 1 et 150 cm
+        printf("Quelle est la longueur de votre baggage ? \n");
+        scanf("%f",&longueur);
+        if (longueur<1 && longueur>150) {
+            printf("\n Il faut changer la valeur de la longueur pour quelle soit comprise entre 1 et 150 cm \n");
+            scanf("%f",&longueur);
         }
-    else {
-        if (b<c) { short t2=b; b=c; c=t2 ; }
-        else {
-            if (a<55 && b<35 && c<25) {
-            printf("VALIDE");
-            }
-            else { print("NON VALIDE");}
-        }
-    }
 
+        printf("\n Quelle est la largeur de votre baggage ? \n");
+        scanf("%f",&largeur);
+        if (largeur<1 && largeur>150) {
+            printf("\n Il faut changer la valeur de la largeur pour quelle soit comprise entre 1 et 150 cm \n");
+            scanf("%f",&largeur);
+        }
+
+        printf("\n Quelle est la hauteur de votre baggage ? \n");
+        scanf("%f",&hauteur);
+        if (hauteur<1 && hauteur>150) {
+            printf("\n Il faut changer la valeur de la hauteur pour quelle soit comprise entre 1 et 150 cm \n");
+            scanf("%f",&hauteur);
+        }
+
+        //Les dimensions doivent vérifier cette inégalité : longueur>largeur>hauteur (sinon on permute)
+        if (longueur<hauteur) {
+            permuter(&longueur,&hauteur);
+        }
+        if (largeur<hauteur) {
+            permuter(&largeur,&hauteur);
+        }
+        if (longueur<largeur) {
+            permuter(&longueur,&largeur);
+        }
+        printf("\n On a donc comme dimmension pour notre baggage : %f*%f*%f ",&longueur,&largeur,&hauteur);
+
+        //On finit par vérifier si les dimensions concordent avec les dimensions cabines
+        if (longueur<=55 && largeur<=35 && hauteur<=25) {
+            printf("\n VALIDE \n");
+        }
+        else {
+            printf("\n NON VALIDE \n");
+        }
+
+        printf("\n Voulez-vous vérifier les dimensions d'un autre baggage ? Si oui tapez 1 si non tapez 0\n");
+        scanf("%d",&programme);
+    }
+}
